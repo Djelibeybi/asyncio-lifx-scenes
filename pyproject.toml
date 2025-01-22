@@ -30,25 +30,27 @@ Repository = "https://github.com/djelibeybi/asyncio-lifx-scenes"
 Documentation = "https://djelibeybi.github.io/asyncio-lifx-scenes/"
 
 [project.scripts]
-lifx-scenes = "asyncio_lifx_scenes1.cli:app"
+lifx-scenes = "asyncio_lifx_scenes.__main__:app"
 
 [dependency-groups]
 dev = [
-    "pytest>=7.2.0",
-    "pre-commit>=2.20.0",
-    "tox-uv>=1.11.3",
     "deptry>=0.22.0",
-    "mypy>=0.991",
-    "pytest-cov>=4.0.0",
-    "ruff>=0.9.2",
-    "mkdocs>=1.4.2",
     "mkdocs-material>=8.5.10",
+    "mkdocs>=1.4.2",
     "mkdocstrings[python]>=0.26.1",
+    "mypy>=0.991",
+    "pre-commit>=2.20.0",
+    "pytest-asyncio>=0.25.2",
+    "pytest-cov>=4.0.0",
+    "pytest-httpx>=0.35.0",
+    "pytest>=7.2.0",
+    "ruff>=0.9.2",
+    "tox-uv>=1.11.3",
 ]
 
 [build-system]
-requires = ["setuptools >= 61.0"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 
 
@@ -63,10 +65,22 @@ warn_unused_ignores = true
 show_error_codes = true
 
 [tool.pytest.ini_options]
+addopts = """\
+    -v
+    -Wdefault
+    --capture=tee-sys
+    --cov=asyncio_lifx_scenes
+    --cov-report=term-missing:skip-covered
+    --cov-branch
+    --junitxml=junit.xml
+    """
+pythonpath = ["src"]
+faulthandler_timeout = 5
+asyncio_default_fixture_loop_scope = "session"
 testpaths = ["tests"]
 
 [tool.ruff]
-target-version = "py39"
+target-version = "py312"
 line-length = 120
 fix = true
 
@@ -118,7 +132,20 @@ preview = true
 
 [tool.coverage.report]
 skip_empty = true
+exclude_also = [
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
+    ]
 
 [tool.coverage.run]
 branch = true
-source = ["src"]
+source = ["src/"]
+omit = ["src/asyncio_lifx_scenes/__main__.py"]

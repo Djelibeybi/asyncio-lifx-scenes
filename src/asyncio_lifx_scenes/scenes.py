@@ -107,8 +107,8 @@ class LifxScenes:
                 resp.raise_for_status()
                 if fast:
                     return None
-                if "results" in resp.json():
-                    results = list(resp.json()["results"])
+                results = resp.json().get("results", None)
+
             except httpx.HTTPStatusError as exc:
                 _LOGGER.exception("Error response %s from %s", exc.response.status_code, exc.request.url)
 

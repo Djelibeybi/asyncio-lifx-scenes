@@ -9,12 +9,21 @@ import typer
 
 from .scenes import LifxScenes
 
-app = typer.Typer()
+app = typer.Typer(name="lifx-scenes")
 
 
 def complete_ignore() -> list[str]:
     """Return a list of ignore options."""
-    return ["power", "infrared", "duration", "intensity", "hue", "saturation", "brightness", "kelvin"]
+    return [
+        "power",
+        "infrared",
+        "duration",
+        "intensity",
+        "hue",
+        "saturation",
+        "brightness",
+        "kelvin",
+    ]  # pragma: no cover
 
 
 @app.command(name="list")

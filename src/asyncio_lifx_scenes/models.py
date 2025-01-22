@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from dataclasses import asdict, dataclass
+from dataclasses import dataclass
 from typing import Any
 
 
@@ -16,7 +16,3 @@ class LifxScene:
     states: list[dict[str, Any]]
     created_at: int
     updated_at: int
-
-    def as_dict(self) -> dict[str, Any]:
-        """Return the scene as a dictionary."""
-        return asdict(self)
