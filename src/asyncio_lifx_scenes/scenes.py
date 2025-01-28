@@ -16,8 +16,8 @@ LIFX_URL = "https://api.lifx.com/v1/scenes"
 TIMEOUT = 3.0
 
 
-class LifxScenes:
-    """Class to represent LIFX scenes."""
+class LifxCloud:
+    """Class to represent LIFX Cloud access."""
 
     def __init__(self, token: str) -> None:
         """Initialize the LIFX scene."""
@@ -27,6 +27,7 @@ class LifxScenes:
     def list_scenes(self) -> list[LifxScene]:
         """Return a list of scenes stored on LIFX Cloud."""
         header = {"accept": "application/json"}
+
         with httpx.Client(auth=self._auth_token, timeout=TIMEOUT) as client:
             resp = client.get(LIFX_URL, headers=header)
             try:
