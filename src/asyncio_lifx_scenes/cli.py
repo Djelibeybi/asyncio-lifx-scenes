@@ -7,7 +7,7 @@ from typing import Annotated
 import rich
 import typer
 
-from .scenes import LifxScenes
+from .scenes import LifxCloud
 
 app = typer.Typer(name="lifx-scenes")
 
@@ -36,7 +36,7 @@ def list_scenes(
 
     Requires a LIFX Cloud Personal Access Token.
     """
-    scenes = LifxScenes(token).list_scenes()
+    scenes = LifxCloud(token).list_scenes()
     if short is True:
         for scene in scenes:
             rich.print(f"{scene.name}: {scene.uuid}")
@@ -64,7 +64,7 @@ def activate_scene(
 
     Requires a LIFX Cloud Personal Access Token.
     """
-    result = LifxScenes(token).activate_scene(scene_uuid, duration, ignore, fast)
+    result = LifxCloud(token).activate_scene(scene_uuid, duration, ignore, fast)
     if fast is False or result is not None:
         rich.print(result)
 
