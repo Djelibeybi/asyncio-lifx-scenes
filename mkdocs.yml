@@ -5,7 +5,7 @@ site_description: List and activate scenes via the LIFX Cloud.
 site_author: Avi Miller
 edit_uri: edit/main/docs/
 repo_name: djelibeybi/asyncio-lifx-scenes
-copyright: Maintained by <a href="https://djelibeybi.com">djelibeybi</a>.
+copyright: Maintained by <a href="https://omg.dje.li">Avi Miller</a>.
 
 nav:
   - Home: index.md
